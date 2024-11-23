@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 
-input:focus, textarea:focus, select:focus {
+input:focus-within, input:focus, textarea:focus, select:focus {
   outline-style: none;
   outline: none;
   background-color: white;
   box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px white inset;
 }
