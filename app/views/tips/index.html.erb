@@ -1,0 +1,28 @@
+<div class="container mx-auto mt-10">
+  <h1 class="text-2xl font-bold mb-6">Tips</h1>
+  <%= link_to "New Tip", new_tip_path, class: "bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 inline-block mb-4" %>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead>
+      <tr class="bg-gray-100 text-left">
+        <th class="px-4 py-2">Title</th>
+        <th class="px-4 py-2">Best Time</th>
+        <th class="px-4 py-2">User</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tips.each do |tip| %>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="px-4 py-2"><%= tip.title %></td>
+          <td class="px-4 py-2"><%= tip.best_time.humanize %></td>
+          <td class="px-4 py-2"><%= tip.user&.email || "No user" %></td>
+          <td class="px-4 py-2 space-x-2">
+            <%= link_to "Edit", edit_tip_path(tip), class: "text-blue-500 hover:underline" %>
+            <%= button_to "Delete", tip_path(tip), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500 hover:underline" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

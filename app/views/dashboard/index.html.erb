@@ -1,0 +1,24 @@
+<div class="mx-auto w-full border rounded-md md:p-10 p-4 shadow-md">
+  <%=render 'layouts/alerts' %>
+
+  <h1 class="font-bold text-xl text-yellow-600">Dashboard</h1>
+
+  <% @tips.each do |best_time, tips| %>
+    <div class="mb-8 w-full">
+      <!-- Section Title -->
+      <h2 class="text-xl font-semibold mb-4 text-yellow-500 capitalize"><%= best_time.humanize %></h2>
+
+      <!-- Tips List -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% tips.each do |tip| %>
+          <div class="p-4 bg-yellow-50 shadow-md rounded-lg border border-yellow-200">
+            <h3 class="text-lg font-bold mb-2 text-yellow-700"><%= tip.title %></h3>
+            <p class="text-sm text-yellow-600">By: <%= tip.user&.email || "Anonymous" %></p>
+            <p class="text-xs text-yellow-500 mt-2">Created at: <%= tip.created_at.strftime("%B %d, %Y") %></p>
+            <%=link_to 'more...', get_tip_path(tip), class: 'text-sm text-yellow-800' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

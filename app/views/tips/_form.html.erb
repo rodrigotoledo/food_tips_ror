@@ -1,0 +1,35 @@
+<%= form_with model: @tip, local: true, class: "space-y-6 bg-white shadow p-6 rounded-lg" do |form| %>
+  <% if @tip.errors.any? %>
+    <div class="bg-red-100 text-red-800 p-4 rounded">
+      <h3 class="font-bold">There were errors with your submission:</h3>
+      <ul class="list-disc pl-5">
+        <% @tip.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Title -->
+  <div>
+    <%= form.label :title, "Title", class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :title, class: "w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+
+  <!-- Best Time -->
+  <div>
+    <%= form.label :best_time, "Best Time", class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.select :best_time, Tip.best_times.keys.map { |key| [key.humanize, key] }, {}, class: "w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+
+  <!-- User -->
+  <div>
+    <%= form.label :user_id, "User", class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.collection_select :user_id, User.all, :id, :email, include_blank: true, class: "w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+
+  <!-- Submit -->
+  <div>
+    <%= form.submit class: "bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600" %>
+  </div>
+<% end %>

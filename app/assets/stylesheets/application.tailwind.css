@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input:focus, textarea:focus, select:focus {
+  outline-style: none;
+  outline: none;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+}

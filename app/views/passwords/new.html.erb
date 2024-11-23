@@ -1,0 +1,22 @@
+<div class="mx-auto md:w-2/3 w-full border border-yellow-400 rounded-md md:p-10 p-4 shadow-lg bg-yellow-50">
+  <%= render 'layouts/alerts' %>
+
+  <!-- Header -->
+  <h1 class="font-bold text-xl text-yellow-600">Forgot your password?</h1>
+  <p class="text-sm text-yellow-700 mt-2">Enter your email address below to receive reset instructions.</p>
+
+  <!-- Form -->
+  <%= form_with url: passwords_path, class: "contents mt-6" do |form| %>
+    <div class="my-5">
+      <label class="block text-sm font-medium text-yellow-700">
+        <%= heroicon "envelope", variant: :outline, class: "inline h-5 w-5 text-yellow-600 mr-1" %>
+        Email Address
+      </label>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow rounded-md border border-yellow-400 outline-none px-3 py-2 mt-2 w-full focus:ring-yellow-500 focus:border-yellow-500" %>
+    </div>
+
+    <div class="inline">
+      <%= form.submit "Email reset instructions", class: "rounded-lg py-3 px-5 bg-yellow-600 text-white inline-block font-medium cursor-pointer shadow-md hover:bg-yellow-700 focus:ring-2 focus:ring-yellow-500" %>
+    </div>
+  <% end %>
+</div>

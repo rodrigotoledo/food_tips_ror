@@ -1,0 +1,13 @@
+<% if alert = flash[:alert] %>
+  <p class="flex items-center gap-2 py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert">
+    <%= heroicon "exclamation-circle", variant: :solid, class: "h-5 w-5 text-red-500" %>
+    <%= alert %>
+  </p>
+<% end %>
+
+<% if notice = flash[:notice] %>
+  <p class="flex items-center gap-2 py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
+    <%= heroicon "check-circle", variant: :solid, class: "h-5 w-5 text-green-500" %>
+    <%= notice %>
+  </p>
+<% end %>

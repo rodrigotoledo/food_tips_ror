@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Magrinho" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+  </head>
+  <body class="bg-yellow-50">
+    <header class="bg-yellow-600 text-white w-full shadow-md">
+      <div class="container mx-auto px-4 flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+          <%= heroicon "light-bulb", size: 20 %>
+          <%= link_to "Food Tips", root_path, class: "text-white font-semibold text-lg hover:underline" %>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex items-center gap-2">
+          <% if authenticated? %>
+            <span class="hidden sm:inline text-sm text-yellow-200 truncate">
+              <%= Current.user.email_address %>
+            </span>
+            <%= button_to "Sign out", session_path, method: :delete, class: "flex items-center gap-1 text-xs sm:text-sm bg-red-500 hover:bg-red-600 px-3 py-2 rounded-l-md text-white font-semibold shadow" %>
+          <% else %>
+            <div class="flex flex-row">
+            <%= link_to content_tag(:span, heroicon("envelope", variant: :outline, class: "h-5 w-5 text-white") + " Sign In", class: "flex items-center text-xs sm:text-sm"), new_session_path, class: "bg-yellow-500 hover:bg-yellow-700 px-3 py-2 rounded-l-md text-white font-semibold shadow" %>
+            <%= link_to content_tag(:span, heroicon("user", variant: :outline, class: "h-5 w-5 text-white") + " Sign Up", class: "flex items-center text-xs sm:text-sm"), new_registration_path, class: "bg-yellow-500 hover:bg-yellow-700 px-3 py-2 rounded-r-md text-white font-semibold shadow" %>
+            </div>
+          <% end %>
+        </nav>
+
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="p-4 sm:px-6 lg:px-8 mx-auto max-w-screen-md flex h-fit justify-center items-center">
+      <%= yield %>
+    </div>
+  </body>
+
+</html>

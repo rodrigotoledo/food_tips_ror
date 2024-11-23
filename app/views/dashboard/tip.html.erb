@@ -1,0 +1,64 @@
+<div class="mx-auto w-full border rounded-md md:p-10 p-4 shadow-md">
+  <%=render 'layouts/alerts' %>
+  <div class="flex items-center gap-4 mb-6">
+    <%= heroicon "light-bulb", variant: :solid, class: "h-10 w-10 text-yellow-600" %>
+    <h1 class="text-2xl font-bold text-yellow-700">Tip Details</h1>
+  </div>
+
+  <!-- Tip Details -->
+  <div class="space-y-6">
+    <!-- Title -->
+    <div>
+      <h2 class="text-lg font-semibold text-yellow-700 flex items-center gap-2">
+        <%= heroicon "bookmark", variant: :outline, class: "h-5 w-5 text-yellow-600" %>
+        Title
+      </h2>
+      <p class="text-gray-800 text-base mt-1"><%= @tip.title %></p>
+    </div>
+
+    <!-- Content -->
+    <div>
+      <h2 class="text-lg font-semibold text-yellow-700 flex items-center gap-2">
+        <%= heroicon "document-text", variant: :outline, class: "h-5 w-5 text-yellow-600" %>
+        Content
+      </h2>
+      <div class="prose prose-yellow mt-2 text-gray-800">
+        <%= @tip.content.to_s.html_safe %>
+      </div>
+    </div>
+
+    <!-- Best Time -->
+    <div>
+      <h2 class="text-lg font-semibold text-yellow-700 flex items-center gap-2">
+        <%= heroicon "clock", variant: :outline, class: "h-5 w-5 text-yellow-600" %>
+        Best Time
+      </h2>
+      <p class="text-gray-800 text-base mt-1 capitalize"><%= @tip.best_time.humanize %></p>
+    </div>
+
+    <!-- User -->
+    <div>
+      <h2 class="text-lg font-semibold text-yellow-700 flex items-center gap-2">
+        <%= heroicon "user", variant: :outline, class: "h-5 w-5 text-yellow-600" %>
+        Created By
+      </h2>
+      <p class="text-gray-800 text-base mt-1">
+        <%= @tip.user ? @tip.user.email : "Anonymous" %>
+      </p>
+    </div>
+
+    <!-- Created At -->
+    <div>
+      <h2 class="text-lg font-semibold text-yellow-700 flex items-center gap-2">
+        <%= heroicon "calendar", variant: :outline, class: "h-5 w-5 text-yellow-600" %>
+        Created At
+      </h2>
+      <p class="text-gray-800 text-base mt-1"><%= @tip.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div class="mt-6">
+    <%= link_to "Back to Tips", root_path, class: "bg-yellow-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 shadow-md" %>
+  </div>
+</div>
